@@ -1,7 +1,22 @@
+import {Component, React} from 'react';
 import logo from './logo.svg';
+import { subscribeToTimer } from './api';
 import './App.css';
+class App extends Component {
 
-function App() {
+  constructor(props) {
+    super(props);
+  
+    subscribeToTimer((err, timestamp) => this.setState({
+      timestamp
+    }))
+  }
+
+  state = {
+    timestamp: 'no timestamp yet'
+  };
+
+render() {
   return (
     <div className="App">
       <header className="App-header">
@@ -9,17 +24,11 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Time: {this.state.timestamp}</h1>
       </header>
     </div>
   );
+}
 }
 
 export default App;
